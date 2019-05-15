@@ -1,0 +1,61 @@
+
+.div-perfil{
+    margin-top: -12px;
+    margin-bottom: 10px;
+}
+
+.img-perfil{
+    border-radius: 50%;
+    width: 100%;
+}
+
+.icones-menu-lateral{
+    color: #31708f;
+    font-size: 20px;
+}
+
+.a-menu-lateral{
+    color: #31708f;
+    font-weight: 500;
+    text-decoration: none !important;
+}
+
+.a-menu-lateral:hover{
+    color: #043552;
+    text-decoration: underline;
+}
+
+.li-menu-lateral{
+    border-top: #e6e0e0 solid 1px;
+}
+
+.navbar-inverse {
+    background-color: #31708f;
+    border-color: #31708f;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #f5f8fa;
+}
+
+.navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-text {
+    color: #f5f8fa;
+}
+
+.icone-dinheiro{
+    font-size: 60px;
+    margin-top: 1%;
+    color: #0003;
+}
+
+.panel-body {
+    padding: 5px;
+}
+
+.breadcrumb {
+    padding: 8px 15px;
+    margin-bottom: 22px;
+    list-style: none;
+    background-color: white;
+    border-radius: 4px;
+}
