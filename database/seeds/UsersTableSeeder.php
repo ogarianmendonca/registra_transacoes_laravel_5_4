@@ -19,12 +19,14 @@ class UsersTableSeeder extends Seeder
             'name' => 'Administrador',
             'email' => 'admin@email.com',
             'password' => bcrypt('123456'),
+            'perfil_id' => 1
         ]);
 
         User::create([
             'name' => 'Usuário',
             'email' => 'usuario@email.com',
             'password' => bcrypt('123456'),
+            'perfil_id' => 2
         ]);
     }
 }

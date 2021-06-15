@@ -6,7 +6,12 @@ use App\Entities\Saldo;
 use App\Entities\User;
 use App\Entities\HistoricoTransacao;
 use DB;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
+/**
+ * Class FinanceiroService
+ * @package App\Services
+ */
 class FinanceiroService
 {
     private $saldo; 
@@ -15,6 +20,12 @@ class FinanceiroService
 
     private $historico;
 
+    /**
+     * FinanceiroService constructor.
+     * @param Saldo $saldo
+     * @param User $user
+     * @param HistoricoTransacao $historico
+     */
     public function __construct(Saldo $saldo, User $user, HistoricoTransacao $historico)
     {
         $this->saldo = $saldo;
@@ -22,6 +33,10 @@ class FinanceiroService
         $this->historico = $historico;
     }
 
+    /**
+     * @param $valor
+     * @return array
+     */
     public function recarregar($valor)
     {
         DB::beginTransaction();
@@ -58,6 +73,10 @@ class FinanceiroService
         }
     }
 
+    /**
+     * @param $valor
+     * @return array
+     */
     public function sacar($valor)
     {
         //Retorna dados do saldo atual do usuario logado
@@ -101,6 +120,10 @@ class FinanceiroService
         }
     }
 
+    /**
+     * @param $transferir
+     * @return mixed
+     */
     public function getUsuarioTransferencia($transferir)
     {
         $usuario = $this->user->where('name', 'LIKE', "%$transferir%")
@@ -109,7 +132,12 @@ class FinanceiroService
 
         return $usuario;
     }
-    
+
+    /**
+     * @param $valor
+     * @param $destino
+     * @return array
+     */
     public function transferir($valor, $destino)
     {
         //Retorna dados do saldo atual do usuario logado
@@ -162,6 +190,11 @@ class FinanceiroService
         ];
     }
 
+    /**
+     * @param $dados
+     * @param $totalPaginas
+     * @return LengthAwarePaginator
+     */
     public function pesquisaHistorico($dados, $totalPaginas)
     {
         $retorno = $this->historico->where(function($query) use ($dados){
@@ -176,10 +209,8 @@ class FinanceiroService
             if(isset($dados['tipo'])){
                 $query->where('tp_transacao', $dados['tipo']);
             }
-        // })->toSql();
         })->where('usuario_id', auth()->user()->id)->paginate($totalPaginas);
 
         return $retorno;
     }
-
 }

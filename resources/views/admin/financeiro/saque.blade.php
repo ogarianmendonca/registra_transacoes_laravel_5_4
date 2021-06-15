@@ -1,33 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row">
-    <div class="col-md-6">
-        <h2 class="page-header">Sacar</h2>
-    </div>
-
-    <div class="col-md-6 text-right">
-        <ol class="breadcrumb">
-            <li><a href="">Financeiro</a></li>
-            <li><a href="{{ route('admin.financeiro') }}">Saldo</a></li>
-            <li class="active">Sacar</li>
-        </ol>
-    </div>
-</div>
-
-@include('admin.includes.alerts')
-
-<div class="row">
-    <div class="col-md-6">
-    {!! Form::open(['route' => 'admin.financeiro.sacar']) !!}
-        <div class="form-group">
-            {{ Form::label('valor', 'Valor Saque:', ['class' => 'control-label']) }}
-            {{ Form::text('valor', null, ['class' => 'form-control']) }}
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="page-header">Sacar</h2>
         </div>
 
-        {{ Form::submit('Sacar', ['class' => 'btn btn-default']) }}
-    {!! Form::close() !!}
+        <div class="col-md-6 text-right">
+            <ol class="breadcrumb">
+                <li><a href="">Financeiro</a></li>
+                <li><a href="{{ route('admin.financeiro') }}">Saldo</a></li>
+                <li class="active">Sacar</li>
+            </ol>
+        </div>
     </div>
-</div>
 
+    @include('admin.includes.alerts')
+
+    <div class="row">
+        <div class="col-md-6">
+            {!! Form::open(['route' => 'admin.financeiro.sacar']) !!}
+            <div class="form-group">
+                {{ Form::label('valor', 'Valor Saque:', ['class' => 'control-label']) }}
+                {{ Form::text('valor', null, ['class' => 'form-control']) }}
+            </div>
+
+            {{ Form::submit('Sacar', ['class' => 'btn btn-default']) }}
+            {!! Form::close() !!}
+        </div>
+    </div>
 @endsection

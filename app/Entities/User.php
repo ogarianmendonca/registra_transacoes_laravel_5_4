@@ -8,6 +8,10 @@ use App\Entities\Saldo;
 use App\Entities\HistoricoTransacao;
 use App\Entities\Perfil;
 
+/**
+ * Class User
+ * @package App\Entities
+ */
 class User extends Authenticatable
 {
     use Notifiable;

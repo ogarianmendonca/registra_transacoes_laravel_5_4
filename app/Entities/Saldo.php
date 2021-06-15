@@ -4,6 +4,10 @@ namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Saldo
+ * @package App\Entities
+ */
 class Saldo extends Model
 {
     protected $table = 'saldos';

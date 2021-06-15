@@ -3,15 +3,36 @@
 namespace App\Services;
 
 use App\Entities\User;
-use DB;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\RedirectResponse;
 
+/**
+ * Class UsuarioService
+ * @package App\Services
+ */
 class UsuarioService
 {
-
+    /**
+     * UsuarioService constructor.
+     */
     public function __construct()
     {
     }
 
+    /**
+     * @return User[]|Collection
+     */
+    public function getAll()
+    {
+        $usuarios = User::all();
+        return $usuarios;
+    }
+
+    /**
+     * @param $dados
+     * @param $request
+     * @return RedirectResponse
+     */
     public function editarPerfil($dados, $request)
     {
         $user = auth()->user();
@@ -26,20 +47,14 @@ class UsuarioService
             $dados['perfil_id'] = (int)$dados['perfil_id'];
         }
 
-        //Salvar imagem
-        $dados['imagem'] = $user->imagem;
         if($request->hasFile('imagem') && $request->file('imagem')->isValid()){
-            if($user->imagem){
-                $nImagem = $user->imagem;
-            } else {
-                $nImagem = $user->id . "_"  . kebab_case($user->name) . "_" . date('d_ m_ y');
-            }
+            $nImagem = $user->id . "_user_" . date('d_ m_ y');
 
             $extensao = $request->imagem->extension();
             $nomeImagem = "{$nImagem}.{$extensao}";
-            $dados['imagem'] = $nomeImagem ;
+            $dados['imagem'] = $nomeImagem;
 
-            $upload = $request->imagem->storeAs('users', $nomeImagem);
+            $upload = $request->imagem->storeAs('upload/users', $nomeImagem);
 
             if(!$upload){
                 return redirect()->back()->with('error', 'Falha ao fazer upload da imagem!');
@@ -50,5 +65,4 @@ class UsuarioService
 
         return $retorno;
     }
-
 }

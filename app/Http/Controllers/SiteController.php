@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Foundation\Application;
+use Illuminate\View\View;
 
+/**
+ * Class SiteController
+ * @package App\Http\Controllers
+ */
 class SiteController extends Controller
 {
     /**
-     * Retorna view inicial 
+     * @return Factory|Application|View
      */
     public function index()
     {

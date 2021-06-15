@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Services\FinanceiroService;
 use App\Entities\User;
 use App\Entities\HistoricoTransacao;
 use App\Http\Requests\FinanceiroFormRequest;
+use Illuminate\View\View;
 
+/**
+ * Class FinanceiroController
+ * @package App\Http\Controllers
+ */
 class FinanceiroController extends Controller
 {
     private $service;
@@ -18,15 +26,24 @@ class FinanceiroController extends Controller
 
     private $totalPaginas = 3;
 
-    public function __construct(FinanceiroService $service, User $entity, HistoricoTransacao $historico)
-    {
+    /**
+     * FinanceiroController constructor.
+     * @param FinanceiroService $service
+     * @param User $entity
+     * @param HistoricoTransacao $historico
+     */
+    public function __construct(
+        FinanceiroService $service,
+        User $entity,
+        HistoricoTransacao $historico
+    ) {
         $this->service = $service;
         $this->entity = $entity;
         $this->historico = $historico;
     }
 
     /**
-     * Retorna view inicial 
+     * @return Factory|Application|View
      */
     public function index()
     {
@@ -40,7 +57,7 @@ class FinanceiroController extends Controller
     }
 
     /**
-     * Retorna view de nova recarga
+     * @return Factory|Application|View
      */
     public function recarga()
     {
@@ -48,8 +65,8 @@ class FinanceiroController extends Controller
     }
 
     /**
-     * Metodo para efetuar recarga de valores
-     * FinanceiroFormRequest valida os campos obrigatorios
+     * @param FinanceiroFormRequest $request
+     * @return RedirectResponse
      */
     public function recarregar(FinanceiroFormRequest $request)
     {
@@ -63,7 +80,7 @@ class FinanceiroController extends Controller
     }
 
     /**
-     * Retorna a view de saque
+     * @return Factory|Application|View
      */
     public function saque()
     {
@@ -71,7 +88,8 @@ class FinanceiroController extends Controller
     }
 
     /**
-     * Metodo para efetuar retirada de valores
+     * @param FinanceiroFormRequest $request
+     * @return RedirectResponse
      */
     public function sacar(FinanceiroFormRequest $request)
     {
@@ -85,7 +103,7 @@ class FinanceiroController extends Controller
     }
 
     /**
-     * Retorna a view de transferencia 
+     * @return Factory|Application|View
      */
     public function transfere()
     {
@@ -93,7 +111,8 @@ class FinanceiroController extends Controller
     }
 
     /**
-     * Metodo que faz a transferencia a verificação do nome ou e-mail para tranferencia
+     * @param Request $request
+     * @return Factory|Application|RedirectResponse|View
      */
     public function transferir(Request $request)
     {
@@ -113,7 +132,8 @@ class FinanceiroController extends Controller
     }
 
     /**
-     * Metodo que faz a transferencia
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function confirmarTranferir(Request $request)
     {
@@ -133,7 +153,7 @@ class FinanceiroController extends Controller
     }
 
     /**
-     * Retorna historico 
+     * @return Factory|Application|View
      */
     public function historico()
     {
@@ -144,7 +164,8 @@ class FinanceiroController extends Controller
     }
 
     /**
-     * Pesquisa historico
+     * @param Request $request
+     * @return Factory|Application|View
      */
     public function pesquisaHistorico(Request $request)
     {
@@ -154,5 +175,4 @@ class FinanceiroController extends Controller
 
         return view('admin.financeiro.historico', compact('historicos', 'tipos', 'dados'));
     }
-
 }

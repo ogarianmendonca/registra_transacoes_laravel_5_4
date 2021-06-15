@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use App\Entities\User;
 
+/**
+ * Class HistoricoTransacao
+ * @package App\Entities
+ */
 class HistoricoTransacao extends Model
 {
     protected $table = 'historico_transacoes';
@@ -54,5 +58,4 @@ class HistoricoTransacao extends Model
     {
         return $this->belongsTo(User::class, 'usuario_transferencia_id');
     }
-
 }
